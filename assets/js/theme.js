@@ -1,4 +1,4 @@
-// Function to set theme
+http://localhost/php/e%20commerce/get_image.php?id=1// Function to set theme
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
