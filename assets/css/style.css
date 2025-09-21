@@ -27,10 +27,12 @@
 
 .nav-link {
     font-weight: 500;
+    color: #ffffff;
 }
 
 .btn-primary {
     padding: 8px 20px;
+    color: #ffffff;
 }
 
 footer {
@@ -84,6 +86,7 @@ footer a:hover {
 
 .product-details {
     padding: 20px;
+    color: #333333;
 }
 
 /* Dark mode styles */
@@ -135,6 +138,32 @@ footer a:hover {
 [data-theme="dark"] .hero-section {
     background-color: #2d2d2d;
     color: #ffffff;
+}
+
+[data-theme="dark"] .product-details {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .btn-primary, [data-theme="dark"] .nav-link {
+    color: #ffffff;
+}
+
+/* Ensure table headers are visible in normal mode */
+.table thead th {
+    color: #333333;
+}
+
+[data-theme="dark"] .table thead th {
+    color: #ffffff;
+}
+
+/* Ensure all text in the categories table changes color based on the theme */
+[data-theme="dark"] .category-table td, [data-theme="dark"] .category-table th {
+    color: #ffffff;
+}
+
+[data-theme="light"] .category-table td, [data-theme="light"] .category-table th {
+    color: #333333;
 }
 
 /* Theme toggle switch styles */

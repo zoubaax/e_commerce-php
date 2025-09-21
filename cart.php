@@ -130,6 +130,7 @@ foreach ($cart_items as $item) {
                             <div class="d-grid gap-2">
                                 <a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>
                                 <form action="cart_actions.php" method="POST">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="action" value="clear">
                                     <button type="submit" class="btn btn-outline-danger w-100">Clear Cart</button>
                                 </form>

@@ -125,7 +125,7 @@ $orders = $stmt->fetchAll();
                                 <?php else: ?>
                                     <div class="list-group">
                                         <?php foreach ($orders as $order): ?>
-                                            <a href="order_details.php?id=<?php echo $order['id']; ?>" class="list-group-item list-group-item-action">
+                                            <a href="get_order_details.php?id=<?php echo $order['id']; ?>" class="list-group-item list-group-item-action">
                                                 <div class="d-flex w-100 justify-content-between align-items-center">
                                                     <div>
                                                         <h6 class="mb-1">Order #<?php echo $order['id']; ?></h6>

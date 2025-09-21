@@ -74,46 +74,20 @@ $categories = $stmt->fetchAll();
     <link rel="stylesheet" href="../assets/css/dark-theme.css">
 </head>
 <body>
-    <div class="admin-dashboard">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">Admin Dashboard</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="products.php">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="categories.php">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="orders.php">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="users.php">Users</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../index.php">View Site</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../logout.php">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<?php include 'includes/header.php'; ?>
 
-        <div class="container py-5">
+        <div class="container-fluid py-4">
+            <!-- Header Section -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1>Manage Categories</h1>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
-                    Add New Category
-                </button>
+                <h1 class="text-white">Categories Management</h1>
+                <div class="d-flex gap-2">
+                    <a href="../index.php" class="btn btn-outline-primary">
+                        <i class="fas fa-external-link-alt"></i> View Site
+                    </a>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                        <i class="fas fa-plus"></i> Add New Category
+                    </button>
+                </div>
             </div>
 
             <?php if ($success): ?>
@@ -125,7 +99,7 @@ $categories = $stmt->fetchAll();
             <?php endif; ?>
 
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table category-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -162,14 +136,14 @@ $categories = $stmt->fetchAll();
         </div>
 
         <!-- Category Modal -->
-        <div class="modal fade" id="categoryModal" tabindex="-1">
+        <div class="modal fade" id="categoryModal">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content bg-dark">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add/Edit Category</h5>
+                        <h5 class="modal-title text-white">Add/Edit Category</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-white">
                         <form method="POST" id="categoryForm">
                             <input type="hidden" name="id" id="categoryId">
                             

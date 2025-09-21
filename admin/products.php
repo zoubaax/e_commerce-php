@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['delete'])) {
                         description = :description, 
                         price = :price, 
                         category_id = :category_id, 
-                        stock = :stock, 
+                        stock = :stock,
                         featured = :featured";
                 
                 $params = [
@@ -232,45 +232,19 @@ error_log("Found " . count($categories) . " categories");
     <link rel="stylesheet" href="../assets/css/dark-theme.css">
 </head>
 <body class="admin-dashboard">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Admin Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="products.php">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="categories.php">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="orders.php">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="users.php">Users</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">View Site</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../logout.php">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<?php include 'includes/header.php'; ?>
 
     <div class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Manage Products</h1>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                Add New Product
-            </button>
+            <div>
+                <a href="../index.php" class="btn btn-outline-primary me-2">
+                    <i class="fas fa-external-link-alt"></i> View Site
+                </a>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    Add New Product
+                </button>
+            </div>
         </div>
 
         <?php if ($success): ?>
@@ -286,7 +260,6 @@ error_log("Found " . count($categories) . " categories");
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Price</th>
@@ -299,17 +272,6 @@ error_log("Found " . count($categories) . " categories");
                     <?php foreach ($products as $product): ?>
                     <tr>
                         <td><?php echo $product['id']; ?></td>
-                        <td>
-                            <?php if ($product['has_image']): ?>
-                                <img src="get_image.php?id=<?php echo $product['id']; ?>" 
-                                     class="img-thumbnail" alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                     style="width: 50px; height: 50px; object-fit: cover;">
-                            <?php else: ?>
-                                <div class="text-center">
-                                    <i class="fas fa-image text-muted"></i>
-                                </div>
-                            <?php endif; ?>
-                        </td>
                         <td><?php echo htmlspecialchars($product['name']); ?></td>
                         <td><?php echo htmlspecialchars($product['category_name']); ?></td>
                         <td>$<?php echo number_format($product['price'], 2); ?></td>
@@ -478,15 +440,14 @@ error_log("Found " . count($categories) . " categories");
         document.querySelectorAll('.edit-product').forEach(button => {
             button.addEventListener('click', function() {
                 const product = JSON.parse(this.dataset.product);
-                const form = document.getElementById('productForm');
-                
-                form.id.value = product.id;
-                form.name.value = product.name;
-                form.description.value = product.description;
-                form.price.value = product.price;
-                form.category_id.value = product.category_id;
-                form.stock.value = product.stock;
-                form.featured.checked = product.featured == 1;
+                document.querySelector('#productModal form #id').value = product.id;
+                document.querySelector('#productModal form #name').value = product.name;
+                document.querySelector('#productModal form #description').value = product.description;
+                document.querySelector('#productModal form #price').value = product.price;
+                document.querySelector('#productModal form #category_id').value = product.category_id;
+                document.querySelector('#productModal form #stock').value = product.stock;
+                document.querySelector('#productModal form #featured').checked = product.featured == 1;
+                $('#productModal').modal('show');
             });
         });
 

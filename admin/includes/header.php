@@ -7,32 +7,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/php/e commerce/assets/css/style.css">
-    <link rel="stylesheet" href="/php/e commerce/assets/css/dark-mode.css">
+    <link rel="stylesheet" href="/php/e commerce/assets/css/dark-theme.css">
     <script src="/php/e commerce/assets/js/theme.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="dashboard.php">E-Shop Admin</a>
+            <a class="navbar-brand" href="index.php">E-Shop Admin</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php">Dashboard</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) === 'products.php' ? 'active' : ''; ?>" href="products.php">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="products.php">Products</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) === 'categories.php' ? 'active' : ''; ?>" href="categories.php">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="categories.php">Categories</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) === 'orders.php' ? 'active' : ''; ?>" href="orders.php">Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="orders.php">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="users.php">Users</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) === 'users.php' ? 'active' : ''; ?>" href="users.php">Users</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -46,9 +44,6 @@
                                 </span>
                             </label>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">View Site</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../logout.php">Logout</a>

@@ -97,6 +97,7 @@ $categories = $stmt->fetchAll();
                                             <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btn-primary">View Details</a>
                                             <?php if ($product['stock'] > 0): ?>
                                                 <form action="cart_actions.php" method="POST">
+                                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                                     <input type="hidden" name="action" value="add">
                                                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                                                     <button type="submit" class="btn btn-outline-primary w-100">
