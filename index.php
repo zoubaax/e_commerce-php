@@ -14,21 +14,116 @@ require_once 'config/config.php';
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-theme.css">
     <style>
-        .hero-section {
+        /* Hero Slider Styles */
+        .hero-slider {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
-            color: white;
-            padding: 100px 0;
-            background-size: cover;
-            background-position: center;
-            background-image: url('https://img.freepik.com/free-photo/happy-beautiful-couple-posing-with-shopping-bags-violet_496169-2215.jpg?t=st=1749745419~exp=1749749019~hmac=11665155ea15398734a98dd50e7c3cfa64a9fc883e7847d6866e45a11d9a32e5&w=1380');
+            height: 70vh;
+            min-height: 500px;
         }
         
-        .hero-content {
+        .slider-container {
+            height: 100%;
             position: relative;
-            z-index: 1;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
         
         .btn-hero {
@@ -42,22 +137,115 @@ require_once 'config/config.php';
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
+        
+        /* Benefits Section */
+        .icon-lg {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        /* Product Cards */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-slider {
+                height: 60vh;
+                min-height: 400px;
+            }
+            
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .slide-content {
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <!-- Hero Section with Online Photo -->
-    <section class="hero-section">
-        <div class="container py-5">
-            <div class="row justify-content-center text-center hero-content">
-                <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-4">Discover Amazing Products</h1>
-                    <p class="lead mb-5">Shop the latest trends at unbeatable prices with fast, reliable delivery</p>
-                    <div class="d-flex gap-3 justify-content-center">
-                        <a href="products.php" class="btn btn-light btn-hero">Shop Now</a>
-                        <a href="#featured" class="btn btn-outline-light btn-hero">Featured Products</a>
+    <!-- Hero Slider Section -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <!-- Slide 1 -->
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="display-4 fw-bold mb-4">Summer Collection 2024</h1>
+                        <p class="lead mb-5">Discover our latest summer fashion with up to 50% off on selected items.</p>
+                        <div class="d-flex gap-3">
+                            <a href="products.php" class="btn btn-light btn-hero">Shop Now</a>
+                            <a href="#featured" class="btn btn-outline-light btn-hero">View Collection</a>
+                        </div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="display-4 fw-bold mb-4">Tech Gadgets Sale</h1>
+                        <p class="lead mb-5">Upgrade your tech with our premium electronics at unbeatable prices.</p>
+                        <div class="d-flex gap-3">
+                            <a href="products.php?category=electronics" class="btn btn-light btn-hero">Shop Electronics</a>
+                            <a href="products.php" class="btn btn-outline-light btn-hero">All Products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="display-4 fw-bold mb-4">Home & Lifestyle</h1>
+                        <p class="lead mb-5">Transform your living space with our curated home collection.</p>
+                        <div class="d-flex gap-3">
+                            <a href="products.php?category=home" class="btn btn-light btn-hero">Shop Home</a>
+                            <a href="products.php" class="btn btn-outline-light btn-hero">All Products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slider Navigation -->
+            <div class="slider-nav">
+                <button class="slider-btn prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Slider Dots -->
+            <div class="slider-controls">
+                <div class="slider-dots">
+                    <div class="slider-dot active" data-slide="0"></div>
+                    <div class="slider-dot" data-slide="1"></div>
+                    <div class="slider-dot" data-slide="2"></div>
                 </div>
             </div>
         </div>
@@ -68,7 +256,7 @@ require_once 'config/config.php';
         <div class="container">
             <div class="row g-4 text-center">
                 <div class="col-md-4">
-                    <div class="p-4 rounded-3 bg-white shadow-sm">
+                    <div class="p-4 rounded-3 bg-white shadow-sm h-100">
                         <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-3 mx-auto">
                             <i class="fas fa-shipping-fast"></i>
                         </div>
@@ -77,7 +265,7 @@ require_once 'config/config.php';
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 rounded-3 bg-white shadow-sm">
+                    <div class="p-4 rounded-3 bg-white shadow-sm h-100">
                         <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-3 mx-auto">
                             <i class="fas fa-undo-alt"></i>
                         </div>
@@ -86,7 +274,7 @@ require_once 'config/config.php';
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 rounded-3 bg-white shadow-sm">
+                    <div class="p-4 rounded-3 bg-white shadow-sm h-100">
                         <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-3 mx-auto">
                             <i class="fas fa-lock"></i>
                         </div>
@@ -229,5 +417,81 @@ require_once 'config/config.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/main.js"></script>
+    
+    <!-- Slider Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Show the selected slide
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            // Function to show next slide
+            function nextSlide() {
+                let nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            // Function to show previous slide
+            function prevSlide() {
+                let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            // Start automatic sliding
+            function startSlideShow() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Stop automatic sliding
+            function stopSlideShow() {
+                clearInterval(slideInterval);
+            }
+            
+            // Event listeners for navigation buttons
+            nextBtn.addEventListener('click', function() {
+                stopSlideShow();
+                nextSlide();
+                startSlideShow();
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                stopSlideShow();
+                prevSlide();
+                startSlideShow();
+            });
+            
+            // Event listeners for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    stopSlideShow();
+                    showSlide(index);
+                    startSlideShow();
+                });
+            });
+            
+            // Pause slideshow when hovering over slider
+            const slider = document.querySelector('.hero-slider');
+            slider.addEventListener('mouseenter', stopSlideShow);
+            slider.addEventListener('mouseleave', startSlideShow);
+            
+            // Initialize the slider
+            startSlideShow();
+        });
+    </script>
 </body>
 </html>
